@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./download.jfif">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="./download.jfif">
+    <title>AOG TechHub Digital Transformation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 80px;
+            display: none;
+            position: relative;
+            background: white;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #e94560, #f27121);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #0f3460;
+        }
+
+        .slide h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #e94560;
+        }
+
+        .slide p, .slide li {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #4B5563;
+        }
+
+        .hero-section {
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 60px;
+            margin: 20px 0;
+            border: 3px solid #e94560;
+        }
+
+        .logo {
+            font-size: 4rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #e94560, #f27121);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: #0f3460;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.1);
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #e94560;
+            box-shadow: 0 15px 35px rgba(233, 69, 96, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #e94560;
+        }
+
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .tech-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tech-item:hover {
+            border-color: #e94560;
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.15);
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #e94560, #f27121);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .phase {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid #e94560;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.1);
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: #e94560;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .nav-btn:hover {
+            background: #d63384;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(233, 69, 96, 0.4);
+        }
+
+        .nav-btn:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(233, 69, 96, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.3);
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+
+        .problem, .solution {
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .problem {
+            background: linear-gradient(135deg, #fff5f5 0%, #fed7d7 100%);
+            border-left: 5px solid #e53e3e;
+        }
+
+        .solution {
+            background: linear-gradient(135deg, #f0fff4 0%, #c6f6d5 100%);
+            border-left: 5px solid #38a169;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .pricing-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card:hover {
+            border-color: #e94560;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(233, 69, 96, 0.2);
+        }
+
+        .pricing-card.featured {
+            border-color: #e94560;
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'POPULAR';
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #e94560;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #e94560;
+            margin: 20px 0;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, #e94560, #f27121);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 30px 0;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(233, 69, 96, 0.3);
+        }
+
+        ul {
+            padding-left: 30px;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 5px solid #f27121;
+            box-shadow: 0 5px 15px rgba(242, 113, 33, 0.1);
+        }
+
+        .workflow-step {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .workflow-step:hover {
+            border-color: #e94560;
+            box-shadow: 0 5px 15px rgba(233, 69, 96, 0.1);
+        }
+
+        .step-number {
+            background: #e94560;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px 20px;
+            }
+            
+            .slide h1 {
+                font-size: 2.5rem;
+            }
+            
+            .slide h2 {
+                font-size: 2rem;
+            }
+            
+            .features-grid, .tech-stack, .stats-container, .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <div class="slide-counter">
+            <span id="current-slide">1</span> / <span id="total-slides">16</span>
+        </div>
+
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="hero-section">
+                <div class="logo">AOG TechHub</div>
+                <div class="tagline">Digital Transformation Initiative</div>
+                <p style="font-size: 1.3rem; color: #e94560; margin-top: 30px;">
+                    Computerizing Hub Operations & User Management
+                </p>
+                <p style="color: #0f3460; margin-top: 20px; font-weight: 600;">
+                    Mobile Application Development Proposal | 2025
+                </p>
+            </div>
+        </div>
+
+        <!-- Slide 2: Current Challenges -->
+        <div class="slide">
+            <h2>Current Operational Challenges</h2>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>Manual Processes</h3>
+                    <ul>
+                        <li>Paper-based registration system</li>
+                        <li>Manual tracking of hub usage</li>
+                        <li>Inefficient payment collection</li>
+                        <li>Poor user record management</li>
+                        <li>Limited usage analytics</li>
+                        <li>Time-consuming administrative tasks</li>
+                        <li>Difficulty in resource planning</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>Digital Solutions</h3>
+                    <ul>
+                        <li>Mobile app registration</li>
+                        <li>Automated usage tracking</li>
+                        <li>Digital payment integration</li>
+                        <li>Centralized user database</li>
+                        <li>Real-time analytics dashboard</li>
+                        <li>Streamlined operations</li>
+                        <li>Data-driven decision making</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Project Overview -->
+        <div class="slide">
+            <h2>Project Overview</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Objective</h3>
+                    <p>Develop a comprehensive mobile application to digitize AOG TechHub operations, improving efficiency and user experience.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Platform</h3>
+                    <p>Cross-platform mobile application with admin web dashboard for complete hub management.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Transformation</h3>
+                    <p>Convert manual processes into automated, data-driven systems for optimal hub operations.</p>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Vision Statement</h3>
+                <p>To create a fully integrated digital ecosystem that transforms AOG TechHub into a modern, efficient, and user-friendly technology workspace.</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Core Features -->
+        <div class="slide">
+            <h2>Core Application Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>User Registration</h3>
+                    <p>Digital registration system with profile management, document uploads, and verification processes.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Booking System</h3>
+                    <p>Real-time seat/desk booking with day, night, and monthly plan options.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Payment Integration</h3>
+                    <p>Secure digital payments for all hub services with multiple payment methods.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Usage Tracking</h3>
+                    <p>Automated monitoring of user activities, check-ins, and resource utilization.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>Notifications</h3>
+                    <p>Push notifications for bookings, payments, announcements, and reminders.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📈</div>
+                    <h3>Analytics Dashboard</h3>
+                    <p>Comprehensive analytics for hub management and business intelligence.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: User Management System -->
+        <div class="slide">
+            <h2>User Management & Tracking</h2>
+            <div class="workflow-step">
+                <div class="step-number">1</div>
+                <div>
+                    <h3>Registration Process</h3>
+                    <p>Users register through mobile app with personal details, photo, and verification documents</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">2</div>
+                <div>
+                    <h3>Profile Verification</h3>
+                    <p>Admin approval system with document verification and background checks</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">3</div>
+                <div>
+                    <h3>Access Control</h3>
+                    <p>QR code-based entry system with real-time check-in/check-out tracking</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">4</div>
+                <div>
+                    <h3>Usage Monitoring</h3>
+                    <p>Automatic tracking of time spent, resources used, and activity patterns</p>
+                </div>
+            </div>
+            <div class="workflow-step">
+                <div class="step-number">5</div>
+                <div>
+                    <h3>Analytics & Reporting</h3>
+                    <p>Detailed reports on user behavior, peak times, and resource utilization</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Subscription Plans -->
+        <div class="slide">
+            <h2>Digital Subscription Plans</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Day Pass</h3>
+                    <div class="price">₦2,000</div>
+                    <ul class="feature-list">
+                        <li>8-hour access</li>
+                        <li>Wi-Fi included</li>
+                        <li>Power outlet</li>
+                        <li>Basic amenities</li>
+                        <li>Mobile app support</li>
+                    </ul>
+                </div>
+                <div class="pricing-card featured">
+                    <h3>Night Pass</h3>
+                    <div class="price">₦2,500</div>
+                    <ul class="feature-list">
+                        <li>6PM - 12AM access</li>
+                        <li>High-speed Wi-Fi</li>
+                        <li>Dedicated workspace</li>
+                        <li>Security included</li>
+                        <li>Extended support</li>
+                    </ul>
+                </div>
+                <div class="pricing-card">
+                    <h3>Monthly Plan</h3>
+                    <div class="price">₦45,000</div>
+                    <ul class="feature-list">
+                        <li>24/7 access</li>
+                        <li>Dedicated desk</li>
+                        <li>Meeting room access</li>
+                        <li>Priority support</li>
+                        <li>Storage locker</li>
+                        <li>Printing credits</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Technical Architecture -->
+        <div class="slide">
+            <h2>Technical Architecture</h2>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <h3>Mobile App</h3>
+                    <ul>
+                        <li>React Native</li>
+                        <li>Expo Development</li>
+                        <li>Redux State Management</li>
+                        <li>Push Notifications</li>
+                        <li>QR Code Scanner</li>
+                        <li>Offline Capability</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>Backend System</h3>
+                    <ul>
+                        <li>Node.js & Express</li>
+                        <li>RESTful APIs</li>
+                        <li>JWT Authentication</li>
+                        <li>Socket.io (Real-time)</li>
+                        <li>File Upload System</li>
+                        <li>Email/SMS Integration</li>
+                    </ul>
+                </div>
+                <div class="tech-item">
+                    <h3>Database & Analytics</h3>
+                    <ul>
+                        <li>MongoDB (Primary DB)</li>
+                        <li>Redis (Caching)</li>
+                        <li>Analytics Engine</li>
+                        <li>Backup Systems</li>
+                        <li>Data Security</li>
+                        <li>Report Generation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Integration Partners</h3>
+                <p><strong>Payments:</strong> Paystack, Flutterwave | <strong>Communications:</strong> Twilio, Firebase | <strong>Storage:</strong> AWS S3, Cloudinary</p>
+            </div>
+        </div>
+
+        <!-- Slide 8: Key Functionalities -->
+        <div class="slide">
+            <h2>Key System Functionalities</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Space Management</h3>
+                    <ul>
+                        <li>Real-time desk availability</li>
+                        <li>Resource booking system</li>
+                        <li>Meeting room scheduling</li>
+                        <li>Capacity management</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Financial Management</h3>
+                    <ul>
+                        <li>Automated billing</li>
+                        <li>Payment tracking</li>
+                        <li>Revenue analytics</li>
+                        <li>Invoice generation</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👥</div>
+                    <h3>Community Features</h3>
+                    <ul>
+                        <li>Member directory</li>
+                        <li>Event management</li>
+                        <li>Networking tools</li>
+                        <li>Communication platform</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Security & Access</h3>
+                    <ul>
+                        <li>QR code entry system</li>
+                        <li>Visitor management</li>
+                        <li>Security monitoring</li>
+                        <li>Access control logs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Admin Dashboard Features -->
+        <div class="slide">
+            <h2>Admin Dashboard Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Analytics & Reports</h3>
+                    <p>Comprehensive dashboard with usage statistics, revenue reports, and user behavior analytics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👤</div>
+                    <h3>User Management</h3>
+                    <p>Complete user lifecycle management with registration approval, profile editing, and access control</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Payment Management</h3>
+                    <p>Transaction monitoring, payment reconciliation, and financial reporting tools</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Resource Management</h3>
+                    <p>Desk allocation, meeting room management, and facility maintenance tracking</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📢</div>
+                    <h3>Communication Tools</h3>
+                    <p>Announcement system, notification management, and member communication features</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>System Configuration</h3>
+                    <p>Pricing management, system settings, and integration configurations</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: User Experience Design -->
+        <div class="slide">
+            <h2>User Experience Design</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Modern UI Design</h3>
+                    <p>Clean, professional interface with AOG branding and intuitive navigation</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile-First Approach</h3>
+                    <p>Optimized for mobile devices with responsive design and touch-friendly interactions</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Performance Optimized</h3>
+                    <p>Fast loading times, smooth animations, and efficient resource usage</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Offline Capability</h3>
+                    <p>Core features work offline with automatic sync when connection is restored</p>
+                </div>
+            </div>
+            <div class="highlight">
+                <h3>Design Principles</h3>
+                <p><strong>Simplicity:</strong> Easy-to-use interface | <strong>Efficiency:</strong> Quick task completion | <strong>Consistency:</strong> Unified design language | <strong>Accessibility:</strong> Inclusive design for all users</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Implementation Benefits -->
+        <div class="slide">
+            <h2>Implementation Benefits</h2>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number">75%</div>
+                    <div>Reduction in Admin Time</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">90%</div>
+                    <div>Improved Data Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50%</div>
+                    <div>Faster Check-in Process</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div>Real-time Visibility</div>
+                </div>
+            </div>
+            <div class="problem-solution">
+                <div class="problem">
+                    <h3>Operational Improvements</h3>
+                    <ul>
+                        <li>Streamlined registration process</li>
+                        <li>Automated payment collection</li>
+                        <li>Reduced paperwork and errors</li>
+                        <li>Better resource utilization</li>
+                        <li>Enhanced security and access control</li>
+                    </ul>
+                </div>
+                <div class="solution">
+                    <h3>Business Growth</h3>
+                    <ul>
+                        <li>Increased member satisfaction</li>
+                        <li>Data-driven decision making</li>
+                        <li>Scalable operations</li>
+                        <li>New revenue opportunities</li>
+                        <li>Competitive advantage</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Development Roadmap -->
+        <div class="slide">
+            <h2>Development Roadmap</h2>
+            <div class="roadmap">
+                <div class="phase">
+                    <h3>Phase 1: Foundation (Weeks 1)</h3>
+                    <ul>
+                        <li>Information gathering</li>
+                        <li>User registration system</li>
+                        <li>Basic profile management</li>
+                        <li>Payment integration</li>
+                        <li>Admin dashboard setup</li>
+                        <li>Database design</li>
+                        <li>Basic mobile app UI</li>
+                    </ul>
+                </div>
+                <div class="phase">
+                    <h3>Phase 2: Core Features (Weeks 2)</h3>
+                    <ul>
+                        <li>Booking system</li>
+                        <li>QR code access control</li>
+                        <li>Usage tracking</li>
+                        <li>Notification system</li>
+                        <li>Analytics dashboard</li>
+                        <li>Testing and refinement</li>
+                    </ul>
+                </div>
+                <div class="phase">
+                    <h3>Phase 3: Advanced Features (Weeks 3)</h3>
+                    <ul>
+                        <li>Community features</li>
+                        <li>Advanced analytics</li>
+                        <li>Integration with existing systems</li>
+                        <li>Performance optimization</li>
+                        <li>Staff training</li>
+                        <li>Go-live and support</li>
+                        <li>Post-launch evaluation</li>
+                        <li>Future enhancements planning</li>
+                    </ul>
+                    <div class="phase-summary">
+                        <h4>Phase 3 Summary</h4>
+                        <p>In this phase, we will focus on building advanced features that enhance user engagement and streamline operations. Key activities include developing community features, implementing advanced analytics, and ensuring seamless integration with existing systems.</p>
+                    </div>
+                </div>
+                <div class="phase">
+                    <h3>Phase 4: Optimization and Growth (Weeks 4)</h3>
+                    <ul>
+                        <li>Performance monitoring</li>
+                        <li>User feedback collection</li>
+                        <li>Feature enhancements</li>
+                        <li>Marketing strategy development</li>
+                        <li>Partnership exploration</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 13: Team & Expertise -->
+        <div class="slide">
+            <h2>Team & Expertise</h2>
+            <div class="team">
+                <div class="member">
+                    <h3>Temitope Adeleke</h3>
+                    <p>Project Manager</p>
+                </div>
+                <div class="member">
+                    <h3>Codeforcer Dev</h3>
+                    <p>Lead Developer</p>
+                </div>
+                <div class="member">
+                    <h3>James OluwaSegun</h3>
+                    <p>UI/UX Designer</p>
+                </div>
+                <div class="member">
+                    <h3>Ayomide</h3>
+                    <p>QA Specialist</p>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 14: Budget Overview -->
+        <div class="slide">
+            <h2>Budget Overview</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Development Costs</h3>
+                    <div class="price">₦150,000</div>
+                    <ul class="feature-list">
+                        <li>Development team salaries</li>
+                        <li>Software licenses</li>
+                        <li>Testing and QA</li>
+                        <li>Infrastructure costs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Slide 15: Call to Action -->
+        <div class="slide">
+            <h2>Call to Action</h2>
+            <p>Ready to take the next step? Contact us today to discuss your project requirements and how we can help you achieve your goals.</p>
+            <a href="mailto:codeforcerdev@gmail.com" class="cta-button">Get in Touch</a>
+            <span>Phone number: <a href="tel:+2348105209452">+234 810 520 9452</a></span>
+        </div>
+        <!-- Slide 16: Thank You -->
+        <div class="slide">
+            <h2>Thank You</h2>
+            <p>We appreciate your time and consideration. Let's work together to bring your vision to life!</p>
+        </div>
+        <div class="navigation">
+            <button class="nav-btn" id="prev-slide" disabled>Previous</button>
+            <button class="nav-btn" id="next-slide">Next</button>
+        </div>
+    </div>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const currentSlideCounter = document.getElementById('current-slide');
+        const totalSlidesCounter = document.getElementById('total-slides');
+        const prevButton = document.getElementById('prev-slide');
+        const nextButton = document.getElementById('next-slide');
+        const endButton = document.getElementById('end-presentation');
+
+        let currentSlideIndex = 0;
+
+        function updateSlideVisibility() {
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === currentSlideIndex);
+            });
+            currentSlideCounter.textContent = currentSlideIndex + 1;
+            prevButton.disabled = currentSlideIndex === 0;
+            nextButton.disabled = currentSlideIndex === totalSlides - 1;
+        }
+
+        nextButton.addEventListener('click', () => {
+            if (currentSlideIndex < totalSlides - 1) {
+                currentSlideIndex++;
+                updateSlideVisibility();
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                updateSlideVisibility();
+            }
+        });
+
+        endButton.addEventListener('click', () => {
+            alert('Thank you for viewing the presentation!');
+            // Optionally, you can redirect or close the presentation
+        });
+
+        totalSlidesCounter.textContent = totalSlides;
+        updateSlideVisibility();
+    </script>
+</body>
+</html>
